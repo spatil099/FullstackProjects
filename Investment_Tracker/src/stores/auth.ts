@@ -34,7 +34,7 @@ export const useAuthStore = defineStore('auth', {
       const isValid = bcrypt.compareSync(password, data.password_hash);
       if (!isValid) throw new Error('Invalid email or password');
 
-      this.user = { id: data.id, email: data.email };
+      this.user = { id: data.user_id, email: data.email };
       return this.user;
     },
 
