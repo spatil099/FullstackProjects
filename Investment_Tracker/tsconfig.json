@@ -12,6 +12,15 @@
     }
   ],
   "compilerOptions": {
-    "module": "NodeNext"
+    "module": "Node16",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "moduleResolution": "Node16",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true
   }
 }
