@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import { supabase } from '../supabase/client'
 import { useAuthStore } from '../stores/auth'; 
 import { useRouter } from 'vue-router';
+import NavBar from '../views/NavBar.vue';
 
 // Pinia store instance
 const authStore = useAuthStore();
@@ -86,6 +87,7 @@ onMounted(fetchData);
 </script>
 
 <template>
+  <NavBar></NavBar>
   <div class="p-6">
     <h1 class="text-2xl font-bold mb-4">Dashboard</h1>
 

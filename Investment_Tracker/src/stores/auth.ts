@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null as { id: string; email: string } | null,
+    user: null as { id: string; email: string, name:string } | null,
   }),
 
   actions: {
@@ -12,9 +12,9 @@ export const useAuthStore = defineStore('auth', {
       const hashedPassword = bcrypt.hashSync(password, 10);
       const { data, error } = await supabase.from('users').insert([
         {
-          full_name: fullName,
+          name,
           email,
-          password_hash: hashedPassword,
+          encrypted_password: hashedPassword,
         },
       ]);
 
@@ -25,16 +25,15 @@ export const useAuthStore = defineStore('auth', {
     async login(email: string, password: string) {
       const { data, error } = await supabase
         .from('users')
-        .select('user_id, email, password_hash')
-        .eq('email', email)
-        .single();
+        .select('id, name, email, encrypted_password')
+        .eq('email', email);
 
       if (error) throw new Error('Invalid email or password');
 
-      const isValid = bcrypt.compareSync(password, data.password_hash);
+      const isValid = bcrypt.compareSync(password, data.encrypted_password);
       if (!isValid) throw new Error('Invalid email or password');
 
-      this.user = { id: data.user_id, email: data.email };
+      this.user = { id: data.id, email: data.email, name: data.name };
       return this.user;
     },
 

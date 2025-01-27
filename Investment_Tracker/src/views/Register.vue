@@ -1,24 +1,45 @@
 <template>
-    <div class="flex justify-center items-center h-screen">
-      <form @submit.prevent="handleRegister" class="bg-white p-6 rounded-lg shadow-md w-96">
-        <h2 class="text-2xl font-bold mb-4">Register</h2>
-        <div class="mb-4">
-          <label class="block text-gray-700">Full Name</label>
-          <input v-model="fullName" type="text" class="w-full px-3 py-2 border rounded-lg" required />
+  <div class="card flex justify-center">
+      <Toast />
+
+      <Form v-slot="$form" @submit="handleRegister" class="flex flex-col gap-4 w-full sm:w-60 space-between">
+        <div class="flex flex-col gap-1">  
+        <h1> Investment Tracker </h1>
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700">Email</label>
-          <input v-model="email" type="email" class="w-full px-3 py-2 border rounded-lg" required />
+        <div class="flex flex-col gap-1">  
+        <InputGroup >
+            <InputGroupAddon>
+              <i class="pi pi-user"/>
+            </InputGroupAddon> 
+              <InputText name="name" v-model="name" type="text" placeholder="Full Name" fluid />
+              <Message v-if="$form.name?.invalid" severity="error" size="small" variant="simple">{{ $form.name.error.message }}</Message>
+          </InputGroup>
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700">Password</label>
-          <input v-model="password" type="password" class="w-full px-3 py-2 border rounded-lg" required />
+        <div class="flex flex-col gap-1">  
+        <InputGroup >
+            <InputGroupAddon>
+              <i class="pi pi-at"/>
+            </InputGroupAddon> 
+              <InputText name="email" v-model="email" type="text" placeholder="E-Mail" fluid />
+              <Message v-if="$form.email?.invalid" severity="error" size="small" variant="simple">{{ $form.email.error.message }}</Message>
+          </InputGroup>
         </div>
-        <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-lg">
-          Register
-        </button>
-      </form>
-    </div>
+        <div class="flex flex-col gap-1">  
+          <InputGroup class="flex flex-col gap-1">
+            <InputGroupAddon>
+              <i class="pi pi-key"/>
+            </InputGroupAddon> 
+              <Password name="password" v-model="password" placeholder="Password" :feedback="false" toggleMask fluid />
+              <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">
+                  <ul class="my-0 px-4 flex flex-col gap-1">
+                      <li v-for="(error, index) of $form.password.errors" :key="index">{{ error.message }}</li>
+                  </ul>
+              </Message>
+          </InputGroup>
+        </div>
+        <Button type="submit" severity="secondary" label="Submit" fluid />
+      </Form>
+  </div>
   </template>
   
   <script lang="ts">
@@ -28,7 +49,7 @@
   
   export default defineComponent({
     setup() {
-      const fullName = ref('');
+      const name = ref('');
       const email = ref('');
       const password = ref('');
       const authStore = useAuthStore();
@@ -36,7 +57,7 @@
   
       const handleRegister = async () => {
         try {
-          await authStore.register(fullName.value, email.value, password.value);
+          await authStore.register(name.value, email.value, password.value);
           alert('Registration successful! Please login.');
           router.push('/login');
         } catch (error: any) {
@@ -44,7 +65,7 @@
         }
       };
   
-      return { fullName, email, password, handleRegister };
+      return { name, email, password, handleRegister };
     },
   });
   </script>
