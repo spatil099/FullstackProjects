@@ -29,6 +29,7 @@
           </InputGroup>
         </div>
         <Button type="submit" severity="secondary" label="Submit" fluid />
+        <a href="/register"><Message severity="info" size="medium" variant="simple">New User ? Don't Worry We got you covered. </Message></a>
       </Form>
   </div>
 </template>
@@ -53,7 +54,7 @@
   
       const handleLogin = async () => {
         try {
-          await authStore.login(email, password);
+          await authStore.login(email.value, password.value);
           localStorage.setItem('auth', JSON.stringify(authStore.user));
           router.push('/dashboard');
         } catch (error: any) {
@@ -65,5 +66,13 @@
     },
   });
   </script>
+
+  <style scoped>
+.container {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+</style>
 
   

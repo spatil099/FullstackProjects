@@ -38,6 +38,7 @@
           </InputGroup>
         </div>
         <Button type="submit" severity="secondary" label="Submit" fluid />
+        <a href="/login"><Message severity="info" size="medium" variant="simple">Already Registered ? Login instead.</Message></a>
       </Form>
   </div>
   </template>

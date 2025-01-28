@@ -8,7 +8,7 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
-    async register(fullName: string, email: string, password: string) {
+    async register(name: string, email: string, password: string) {
       const hashedPassword = bcrypt.hashSync(password, 10);
       const { data, error } = await supabase.from('users').insert([
         {
@@ -26,7 +26,8 @@ export const useAuthStore = defineStore('auth', {
       const { data, error } = await supabase
         .from('users')
         .select('id, name, email, encrypted_password')
-        .eq('email', email);
+        .eq('email', email)
+        .single();
 
       if (error) throw new Error('Invalid email or password');
 
