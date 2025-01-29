@@ -1,10 +1,10 @@
 <template>
-  <div class="card flex justify-center">
+  <div class="container">
       <Toast />
-
-      <Form v-slot="$form" @submit="handleRegister" class="flex flex-col gap-4 w-full sm:w-60 space-between">
+      <div class="register-container">
+      <Form v-slot="$form" @submit="handleRegister" class="align-center flex flex-col gap-4 w-full sm:w-60 space-between">
         <div class="flex flex-col gap-1">  
-        <h1> Investment Tracker </h1>
+        <h1> Register </h1>
         </div>
         <div class="flex flex-col gap-1">  
         <InputGroup >
@@ -37,9 +37,10 @@
               </Message>
           </InputGroup>
         </div>
-        <Button type="submit" severity="secondary" label="Submit" fluid />
-        <a href="/login"><Message severity="info" size="medium" variant="simple">Already Registered ? Login instead.</Message></a>
+        <div><Button type="submit" severity="secondary" label="Submit" fluid /></div>
+        <div><a href="/login"><Message severity="info" size="medium" variant="simple">Already Registered ? Login instead.</Message></a></div>
       </Form>
+  </div>
   </div>
   </template>
   
@@ -70,4 +71,27 @@
     },
   });
   </script>
+  
+<style scoped>
+  .container {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  div {
+    padding: 0.3rem;
+  }
+  
+  .align-center {
+    text-align:center;
+  }
+  
+  .register-container {
+    max-width: 50%;
+    min-width: fit-content;
+    background-color: white;
+  }
+  
+  
+  </style>
   

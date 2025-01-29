@@ -28,7 +28,7 @@ header {
     vertical-align: middle;
     white-space: nowrap;
     width: 100%;
-
+    border-width: 2px 2px 10px 2px;
 }
 
 #left-items {
