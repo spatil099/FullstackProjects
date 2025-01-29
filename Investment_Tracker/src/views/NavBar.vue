@@ -3,10 +3,11 @@
         <div id="left-items">
             <div id="app_name">Investment Tracker</div>
         </div>
+        <div class="spacer"></div>
         <div id="right-items">
-            <a href="/dashboard"><Button id="dashboard" >Dashboard</Button></a>
-            <Button id="investments">Investments</Button>
-            <a href="/login"><Button id="logout" >Logout</Button></a>
+            <div><a href="/dashboard"><Button id="dashboard" >Dashboard</Button></a></div>
+            <div><Button id="investments">Investments</Button></div>
+            <div><a href="/login"><Button id="logout" >Logout</Button></a></div>
         </div>
         
     </header>    
@@ -18,24 +19,40 @@
 
 <style scoped>
 header {
-    height: 60px;
-    width: 100vw;
-    display: flex;
+    min-height: 3.825rem;
+    background-color: white;
+    border-bottom: .0625rem solid #ecedee;
     align-items: center;
-    justify-content: space-between;
-    background-color: lightgrey
+    display: inline-flex;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 100%;
+
 }
 
+#left-items {
+    margin-right: .625rem !important;
+    box-sizing: border-box;
+}
 #right-items {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
 }
 
-div, Button {
-    padding:5px;
-    margin:2px;
-    font-size:15px
+#right-items, div {
+    margin: 2px;
+    border: 2px;
 }
+
+#app_name {
+    color: #006fc7;
+    cursor: pointer;
+    font-size: 2rem;
+    margin:2px
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
 </style>
