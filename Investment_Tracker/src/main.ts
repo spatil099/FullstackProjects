@@ -15,6 +15,8 @@ import InputText from 'primevue/inputtext';
 import Toast from "primevue/toast";
 import ToastService from "primevue/toastservice";
 import { Form } from '@primevue/forms';
+import CascadeSelect from 'primevue/cascadeselect';
+import FloatLabel from 'primevue/floatlabel';
 import App from './App.vue'
 import router from './router'
 
@@ -36,4 +38,6 @@ app.component("Button", Button);
 app.component("Toast", Toast);
 app.component("Password", Password);
 app.component("Message", Message);
+app.component('CascadeSelect', CascadeSelect);
+app.component('FloatLabel', FloatLabel);
 app.mount('#app')

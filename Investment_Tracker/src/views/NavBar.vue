@@ -6,7 +6,17 @@
         <div class="spacer"></div>
         <div id="right-items">
             <div><a href="/dashboard"><Button id="dashboard" >Dashboard</Button></a></div>
-            <div><Button id="investments">Investments</Button></div>
+            <!-- <div><Button id="investments">Investments</Button></div> -->
+            <div>
+    <CascadeSelect
+      v-model="selectedCategories"
+      :options="groupedCategories"
+      optionLabel="name"
+      optionGroupLabel="type"
+      optionGroupChildren="items"
+      placeholder="Select Investment Category"
+    />
+            </div>
             <div><a href="/login"><Button id="logout" >Logout</Button></a></div>
         </div>
         
@@ -14,7 +24,20 @@
 </template>
 
 <script setup lang="ts">
+import {onMounted, ref} from 'vue'
+import { useInvestmentCategoriesStore } from '../stores/investment_categories';
 
+// Initialize Pinia store
+const investmentCategoriesStore = useInvestmentCategoriesStore();
+// Access grouped categories from the store
+const groupedCategories = investmentCategoriesStore.groupedCategories;
+
+// Selected category
+const selectedCategories = ref(null);
+// Fetch data on component mount
+onMounted(() => {
+  investmentCategoriesStore.getAllCategories();
+});
 </script>
 
 <style scoped>
